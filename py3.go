@@ -8,8 +8,7 @@ import (
 	"sync"
 
 	"github.com/DataDog/go-python3"
-	"github.com/toukii/analyse/log"
-	// "github.com/toukii/goutils"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
