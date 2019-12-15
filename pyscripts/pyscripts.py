@@ -3,22 +3,39 @@ import random
 import numpy as np
 import json
 
-# demo2
+# 相关性分析
 def condd(*A, **args):
+    # print A
+    # print args
+
     start = args["start"]
     step = args["step"]
     end = args["end"]
 
-    x = (end - start)/ step +1
+    x = (args['end'] - args['start'])/ args['step'] +1
     y = len(A[0])-1
 
-    print('%d 行 %d 列 ' % (x, y))
+    # print('%d 行 %d 列 ' % (x, y))
+    # 随机数
 
-    resp = np.random.randn(x,y)
-    print(resp.tolist())
-    resp = json.dumps(resp.tolist())
+    K = 0
+    C = []
+    for i in range(start,end+1,step):
+        # print i
+        A1 = A[:i]
+        r = np.corrcoef(A1, rowvar=0)
+        r1 = r[0][1:]
+        C.append(r1.tolist())
+        K += 1
+
+    print(C)
+    resp = json.dumps(C)
+
+    # resp = np.random.randn(x,y)
+    # print(resp.tolist())
+    # return json.dumps(resp.tolist())
+
     return resp
-
 # demo1
 def foo(*args, **kwargs):
     s = "args=%s kwds=%s" % (args,kwargs)
